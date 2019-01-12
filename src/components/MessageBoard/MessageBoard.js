@@ -8,23 +8,22 @@ class MessageBoard extends React.Component {
       errorMessage: "",
       messages: [],
       subject: "",
-      message: ""
+      message: "",
+      loading: false
     };
   }
 
   componentDidMount() {
     fetch("https://peaceful-headland-32279.herokuapp.com/messages")
-      .then(response => response.json())
+      .then(response => {
+        this.setState({ loading: true });
+        return response.json();
+      })
       .then(result => {
+        this.setState({ loading: false });
         result = result.slice().reverse();
         this.setState({ messages: result });
       });
-
-    // if (this.props.username) {
-    //   this.setState({ username: this.props.username });
-    // } else {
-    //   this.setState({ username: "Anonymous" });
-    // }
   }
 
   onChange = e => {
@@ -133,6 +132,26 @@ class MessageBoard extends React.Component {
             </li>
           ))}
         </ul>
+        {this.state.loading ? (
+          <div
+            class="preloader-wrapper big active"
+            style={{ marginTop: "30px" }}
+          >
+            <div className="spinner-layer spinner-blue-only">
+              <div className="circle-clipper left">
+                <div className="circle" />
+              </div>
+              <div className="gap-patch">
+                <div className="circle" />
+              </div>
+              <div className="circle-clipper right">
+                <div className="circle" />
+              </div>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }

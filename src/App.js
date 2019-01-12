@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { HashRouter, Route } from "react-router-dom";
 
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
@@ -44,7 +44,7 @@ class App extends Component {
     };
 
     return (
-      <BrowserRouter>
+      <HashRouter>
         <div className="App">
           <Navbar
             isSignedIn={this.state.isSignedIn}
@@ -55,7 +55,7 @@ class App extends Component {
           <Route exact path="/signin" render={SigninPage} />
           <Route exact path="/register" render={RegisterPage} />
         </div>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }

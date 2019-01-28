@@ -14,9 +14,9 @@ class MessageBoard extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({ loading: true });
     fetch("https://peaceful-headland-32279.herokuapp.com/messages")
       .then(response => {
-        this.setState({ loading: true });
         return response.json();
       })
       .then(result => {
